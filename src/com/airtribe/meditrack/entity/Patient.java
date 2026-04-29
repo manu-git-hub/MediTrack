@@ -1,7 +1,7 @@
 package com.airtribe.meditrack.entity;
 
 public class Patient extends Person {
-    int patientId;
+    private int patientId;
 
     public Patient(int patientId, String name, String address, String phone, String email, int age) {
         super(name, address, phone, email, "Patient", age);

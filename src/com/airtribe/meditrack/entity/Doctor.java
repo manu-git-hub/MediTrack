@@ -1,10 +1,10 @@
 package com.airtribe.meditrack.entity;
 
 public class Doctor extends Person {
-    int doctorId;
+    private int doctorId;
 
-    public Doctor(int doctorId, String name, String address, String phone, String email) {
-        super(name, address, phone, email, "Doctor");
+    public Doctor(int doctorId, String name, String address, String phone, String email, int age) {
+        super(name, address, phone, email, "Doctor", age);
         this.doctorId = doctorId;
     }
 

@@ -40,7 +40,7 @@ public class Person {
         return personType;
     }
 
-    public int getPersonAge()
+    public int getAge()
     {
         return age;
     }

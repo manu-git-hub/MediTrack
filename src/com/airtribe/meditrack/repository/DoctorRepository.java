@@ -1,27 +1,29 @@
 package com.airtribe.meditrack.repository;
 
 import com.airtribe.meditrack.entity.Doctor;
+import com.airtribe.meditrack.util.DataStore;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DoctorRepository {
 
-    public List<Doctor> doctorList = new ArrayList<>();
+    private final DataStore<Doctor> doctors = new DataStore<>();
 
     public List<Doctor> getDoctorList()
     {
-        return doctorList;
+        return doctors.getAll();
     }
 
     public void addDoctor(Doctor doctor)
     {
-        doctorList.add(doctor);
+        doctors.add(doctor);
     }
 
     public Doctor getDoctorById(int doctorId)
     {
-        for(Doctor doctor : doctorList)
+        for(Doctor doctor : doctors.getAll())
         {
             if(doctor.getDoctorId() == doctorId) {
                 return doctor;
@@ -35,17 +37,22 @@ public class DoctorRepository {
     {
         Doctor doctor = getDoctorById(doctorId);
 
-        doctor.setName(name);
-        doctor.setEmail(email);
-        doctor.setPhone(phone);
-        doctor.setAddress(address);
+        if(doctor != null) {
+            doctor.setName(name);
+            doctor.setEmail(email);
+            doctor.setPhone(phone);
+            doctor.setAddress(address);
+        }
 
         return doctor;
     }
 
     public void deleteDoctor(int doctorId)
     {
-        doctorList.removeIf(doctorList -> doctorList.getDoctorId() == doctorId);
+        Doctor doctorToDelete = getDoctorById(doctorId);
+        if (doctorToDelete != null) {
+            doctors.remove(doctorToDelete);
+        }
     }
 
 }
