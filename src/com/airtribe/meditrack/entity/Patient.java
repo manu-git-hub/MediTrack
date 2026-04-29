@@ -8,5 +8,15 @@ public class Patient extends Person {
         this.patientId = patientId;
     }
 
+    //Getter
+    public int getPatientId() {
+        return patientId;
+    }
+
+
+    //Setter
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
+    }
 
 }
