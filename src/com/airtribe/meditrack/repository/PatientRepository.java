@@ -29,10 +29,10 @@ public class PatientRepository {
 
         Patient patient = getPatientById(patientId);
 
-        patient.setName(name);
-        patient.setAddress(address);
-        patient.setEmail(email);
-        patient.setPhone(phone);
+//        patient.setName(name);
+//        patient.setAddress(address);
+//        patient.setEmail(email);
+//        patient.setPhone(phone);
 
         return patient;
     }
