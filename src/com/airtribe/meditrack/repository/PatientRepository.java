@@ -16,7 +16,7 @@ public class PatientRepository {
         patients.add(patient);
     }
 
-    public Patient getPatientById(int patientId) {
+    public Patient searchPatientById(int patientId) {
         for (Patient patient : patients) {
             if (patient.getPatientId() == patientId) {
                 return patient;
@@ -25,14 +25,41 @@ public class PatientRepository {
         return null;
     }
 
-    public Patient updatePatient(int patientId, String name, String address, String email, String phone) {
+    public List<Patient> searchPatient(String name)
+    {
+        List<Patient> result = new ArrayList<>();
+        for(Patient patient: patients)
+        {
+            if(patient.getName() == name) {
+                result.add(patient);
+            }
+        }
 
-        Patient patient = getPatientById(patientId);
+        return result;
+    }
 
-//        patient.setName(name);
-//        patient.setAddress(address);
-//        patient.setEmail(email);
-//        patient.setPhone(phone);
+    public List<Patient> searchPatient(int age)
+    {
+        List<Patient> result = new ArrayList<>();
+        for(Patient patient: patients)
+        {
+            if(patient.getPersonAge() == age) {
+                result.add(patient);
+            }
+        }
+
+        return result;
+    }
+
+    public Patient updatePatient(int patientId, String name, String address, String email, String phone, int age) {
+
+        Patient patient = searchPatientById(patientId);
+
+        patient.setName(name);
+        patient.setAddress(address);
+        patient.setEmail(email);
+        patient.setPhone(phone);
+        patient.setAge(age);
 
         return patient;
     }

@@ -7,14 +7,16 @@ public class Person {
     private String phone;
     private String email;
     private String personType;
+    private int age;
 
-    public Person(String name, String address, String phone, String email, String personType) {
+    public Person(String name, String address, String phone, String email, String personType, int age) {
         
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.email = email;
         this.personType = personType;
+        this.age = age;
     }
 
     //Getters
@@ -36,5 +38,30 @@ public class Person {
 
     public String getPersonType() {
         return personType;
+    }
+
+    public int getPersonAge()
+    {
+        return age;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

@@ -8,5 +8,23 @@ public class Doctor extends Person {
         this.doctorId = doctorId;
     }
 
-    
+    public int getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "doctorId=" + doctorId +
+                ", name='" + getName() + '\'' +
+                ", address='" + getAddress() + '\'' +
+                ", phone='" + getPhone() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", personType='" + getPersonType() + '\'' +
+                '}';
+    }
 }
