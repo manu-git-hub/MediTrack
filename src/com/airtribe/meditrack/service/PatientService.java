@@ -25,9 +25,26 @@ public class PatientService {
         return _patientRepository.getPatients();
     }
 
-    public List<Patient> searchPatientByName(String name)
+    public List<Patient> searchPatient(String name, Integer age)
     {
-        return _patientRepository.searchPatient(name);
+        if(age != null) {
+            return _patientRepository.searchPatient(age);
+        }
+
+        else{
+            return _patientRepository.searchPatient(name);
+        }
+    }
+
+
+    public Patient updatePatient(int patientId, String name, String address, String email, String phone, int age)
+    {
+        return _patientRepository.updatePatient(patientId, name, address, email, phone, age);
+    }
+
+    public void removePatient(int patientId)
+    {
+         _patientRepository.deletePatient(patientId);
     }
     
 }
