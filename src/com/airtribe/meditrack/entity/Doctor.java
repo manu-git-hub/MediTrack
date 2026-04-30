@@ -25,6 +25,7 @@ public class Doctor extends Person {
                 ", phone='" + getPhone() + '\'' +
                 ", email='" + getEmail() + '\'' +
                 ", personType='" + getPersonType() + '\'' +
+                ", age='" + getAge() + '\'' +
                 '}';
     }
 }

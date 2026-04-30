@@ -28,7 +28,7 @@ public class Patient extends Person {
                 ", phone='" + getPhone() + '\'' +
                 ", email='" + getEmail() + '\'' +
                 ", personType='" + getPersonType() + '\'' +
-                ", age='" + getPersonAge() + '\'' +
+                ", age='" + getAge() + '\'' +
                 '}';
     }
 

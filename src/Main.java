@@ -8,7 +8,7 @@ public class Main {
 
         PatientRepository repository = new PatientRepository();
         repository.addPatient(new Patient(1, "abc", "abc", "123", "abc", 16));
-        System.out.println(repository.getPatient());
+        System.out.println(repository.getPatients());
         //repository.getPatientById(1);
         //repository.addPatient(p);
         //repository.updatePatient(1,"Singh", "Mumbai", "singh@gmail.com", "1010101");
