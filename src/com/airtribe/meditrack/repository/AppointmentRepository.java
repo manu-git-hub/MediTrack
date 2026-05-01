@@ -9,6 +9,22 @@ public class AppointmentRepository {
 
     private final DataStore<Appointment> appointments = new DataStore<>();
 
+    public void save(Appointment appt) {
+        appointments.add(appt);
+    }
+
+    public List<Appointment> findAll() {
+        return appointments.getAll();
+    }
+
+    public Appointment findById(int id) {
+        for (Appointment a : appointments.getAll()) {
+            if (a.getAppointmentId() == id)
+                return a;
+        }
+        return null;
+    }
+
     public List<Appointment> getAppointmentList() {
         return appointments.getAll();
     }
@@ -40,10 +56,10 @@ public class AppointmentRepository {
 
         if (appointment != null) {
 
-            appointment.setAppointmentDate(appointmentDate);
-            appointment.setAppointmentTime(appointmentTime);
-            appointment.setReason(reason);
-            appointment.setStatus(status);
+            // appointment.setAppointmentDate(appointmentDate);
+            // appointment.setAppointmentTime(appointmentTime);
+            // appointment.setReason(reason);
+            // appointment.setStatus(status);
         }
 
         return appointment;

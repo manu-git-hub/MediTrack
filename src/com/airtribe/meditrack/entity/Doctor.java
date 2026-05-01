@@ -1,25 +1,31 @@
 package com.airtribe.meditrack.entity;
 
 public class Doctor extends Person {
-    private int doctorId;
+    private String specialization;
 
-    public Doctor(int doctorId, String name, String password, String address, String phone, String email, int age) {
-        super(name, password, address, phone, email, "Doctor", age);
-        this.doctorId = doctorId;
+    public Doctor(int doctorId, String name, String password, String address, String phone, String email, int age,
+            String specialization) {
+        super(doctorId, name, password, address, phone, email, "Doctor", age);
+        this.specialization = specialization;
+
     }
 
     public int getDoctorId() {
-        return doctorId;
+        return getMedicalEntityId();
     }
 
-    public void setDoctorId(int doctorId) {
-        this.doctorId = doctorId;
+    public String getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
     }
 
     @Override
     public String toString() {
         return "{" +
-                "doctorId=" + doctorId +
+                "doctorId=" + getDoctorId() +
                 ", name='" + getName() + '\'' +
                 ", password='" + getPassword() + '\'' +
                 ", address='" + getAddress() + '\'' +
@@ -27,6 +33,7 @@ public class Doctor extends Person {
                 ", email='" + getEmail() + '\'' +
                 ", personType='" + getPersonType() + '\'' +
                 ", age='" + getAge() + '\'' +
+                ", specialization='" + getSpecialization() + '\'' +
                 '}';
     }
 }

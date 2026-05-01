@@ -1,104 +1,56 @@
 package com.airtribe.meditrack.entity;
 
-public class Appointment {
+import com.airtribe.meditrack.Enum.AppointmentStatus;
 
+import java.time.LocalDateTime;
+
+public class Appointment implements Cloneable {
     private int appointmentId;
-    private int patientId;
-    private int doctorId;
+    private Patient patient;
+    private Doctor doctor;
     private String appointmentDate;
-    private String appointmentTime;
-    private String reason;
-    private String status;
+    private AppointmentStatus status;
 
-    public Appointment(
-            int appointmentId,
-            int patientId,
-            int doctorId,
-            String appointmentDate,
-            String appointmentTime,
-            String reason,
-            String status) {
-
+    public Appointment(int appointmentId, Patient patient, Doctor doctor, String date) {
         this.appointmentId = appointmentId;
-        this.patientId = patientId;
-        this.doctorId = doctorId;
-        this.appointmentDate = appointmentDate;
-        this.appointmentTime = appointmentTime;
-        this.reason = reason;
-        this.status = status;
+        this.patient = patient;
+        this.doctor = doctor;
+        this.appointmentDate = date;
+        this.status = AppointmentStatus.PENDING;
     }
-
-    // Getters
 
     public int getAppointmentId() {
         return appointmentId;
     }
 
-    public int getPatientId() {
-        return patientId;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public int getDoctorId() {
-        return doctorId;
+    public Doctor getDoctor() {
+        return doctor;
     }
 
-    public String getAppointmentDate() {
-        return appointmentDate;
-    }
-
-    public String getAppointmentTime() {
-        return appointmentTime;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public String getStatus() {
+    public AppointmentStatus getStatus() {
         return status;
     }
 
-    // Setters
-
-    public void setAppointmentId(int appointmentId) {
-        this.appointmentId = appointmentId;
-    }
-
-    public void setPatientId(int patientId) {
-        this.patientId = patientId;
-    }
-
-    public void setDoctorId(int doctorId) {
-        this.doctorId = doctorId;
-    }
-
-    public void setAppointmentDate(String appointmentDate) {
-        this.appointmentDate = appointmentDate;
-    }
-
-    public void setAppointmentTime(String appointmentTime) {
-        this.appointmentTime = appointmentTime;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
-
-    public void setStatus(String status) {
+    public void setStatus(AppointmentStatus status) {
         this.status = status;
     }
 
     @Override
-    public String toString() {
+    public Appointment clone() {
+        try {
+            return (Appointment) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 
-        return "{" +
-                "appointmentId=" + appointmentId +
-                ", patientId=" + patientId +
-                ", doctorId=" + doctorId +
-                ", appointmentDate='" + appointmentDate + '\'' +
-                ", appointmentTime='" + appointmentTime + '\'' +
-                ", reason='" + reason + '\'' +
-                ", status='" + status + '\'' +
-                '}';
+    @Override
+    public String toString() {
+        return " {ID=" + appointmentId + ", Patient=" + patient.getName() +
+                ", Doctor=" + doctor.getName() + ", Date='" + appointmentDate + "', Status=" + status + "}";
     }
 }

@@ -88,25 +88,21 @@ public class Main {
 
             System.out.print("Are you sure this is your account? (Y/N): ");
 
+            // VERIFICATION
             String confirmation = scanner.nextLine();
 
             if (confirmation.equalsIgnoreCase("Y")) {
 
-                // PASSWORD VALIDATION
-
                 String password;
-
+                // AUTHENTICATION
                 while (true) {
-
-                    System.out.print("🔐 Enter Password: ");
+                    System.out.print("Enter Password: ");
                     password = scanner.nextLine();
-
                     boolean isValidPassword = Pattern.matches(
                             "^(?=.*[A-Z])(?=.*[@#]).{8,}$",
                             password);
 
                     if (isValidPassword) {
-
                         System.out.println();
                         System.out.println("Authentication Successful");
                         System.out.println("Welcome to MediTrack");
@@ -117,17 +113,12 @@ public class Main {
 
                         System.out.println();
                         System.out.println("Invalid Password");
-                        System.out.println("Password must contain:");
-                        System.out.println("✔ Minimum 8 characters");
-                        System.out.println("✔ At least 1 uppercase letter");
-                        System.out.println("✔ At least 1 special character (@ or #)");
+                        System.out.println("Please contact support team for password reset");
                     }
                 }
-
             } else {
-
                 System.out.println();
-                System.out.println("Authentication Cancelled");
+                System.out.println("Verification Cancelled");
             }
         }
 
