@@ -27,13 +27,10 @@ public class PatientRepository {
         return null;
     }
 
-
-    public List<Patient> searchPatient(String name)
-    {
+    public List<Patient> searchPatientByName(String name) {
         List<Patient> result = new ArrayList<>();
-        for(Patient patient: patients.getAll())
-        {
-            if(patient.getName().equalsIgnoreCase(name)) {
+        for (Patient patient : patients.getAll()) {
+            if (patient.getName().equalsIgnoreCase(name)) {
                 result.add(patient);
             }
         }
@@ -41,12 +38,20 @@ public class PatientRepository {
         return result;
     }
 
-    public List<Patient> searchPatient(int age)
-    {
+    public List<Patient> searchPatientByPhone(String phone) {
         List<Patient> result = new ArrayList<>();
-        for(Patient patient: patients.getAll())
-        {
-            if(patient.getAge() == age) {
+        for (Patient patient : patients.getAll()) {
+            if (patient.getPhone().equalsIgnoreCase(phone)) {
+                result.add(patient);
+            }
+        }
+        return result;
+    }
+
+    public List<Patient> searchPatient(int age) {
+        List<Patient> result = new ArrayList<>();
+        for (Patient patient : patients.getAll()) {
+            if (patient.getAge() == age) {
                 result.add(patient);
             }
         }
@@ -54,7 +59,8 @@ public class PatientRepository {
         return result;
     }
 
-    public Patient updatePatient(int patientId, String name, String address, String email, String phone, int age) {
+    public Patient updatePatient(int patientId, String name, String password, String address, String email,
+            String phone, int age) {
 
         Patient patient = searchPatientById(patientId);
 
@@ -76,4 +82,3 @@ public class PatientRepository {
         }
     }
 }
-

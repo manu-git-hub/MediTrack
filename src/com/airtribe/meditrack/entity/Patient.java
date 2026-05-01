@@ -3,18 +3,17 @@ package com.airtribe.meditrack.entity;
 public class Patient extends Person {
     private int patientId;
 
-    public Patient(int patientId, String name, String address, String phone, String email, int age) {
-        super(name, address, phone, email, "Patient", age);
+    public Patient(int patientId, String name, String password, String address, String phone, String email, int age) {
+        super(name, password, address, phone, email, "Patient", age);
         this.patientId = patientId;
     }
 
-    //Getter
+    // Getter
     public int getPatientId() {
         return patientId;
     }
 
-
-    //Setter
+    // Setter
     public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
@@ -24,6 +23,7 @@ public class Patient extends Person {
         return "{" +
                 "patientId=" + patientId +
                 ", name='" + getName() + '\'' +
+                ", password='" + getPassword() + '\'' +
                 ", address='" + getAddress() + '\'' +
                 ", phone='" + getPhone() + '\'' +
                 ", email='" + getEmail() + '\'' +

@@ -9,42 +9,31 @@ public class PatientService {
 
     private final PatientRepository _patientRepository;
 
-    public PatientService(PatientRepository patientRepository)
-    {
+    public PatientService(PatientRepository patientRepository) {
         _patientRepository = patientRepository;
     }
 
-    public void registerPatient(Patient patient)
-    {
+    public void registerPatient(Patient patient) {
         _patientRepository.addPatient(patient);
         System.out.println("Patient Added Successfully");
     }
 
-    public List<Patient> viewAllPatients()
-    {
+    public List<Patient> viewAllPatients() {
         return _patientRepository.getPatients();
     }
 
-    public List<Patient> searchPatient(String name, Integer age)
-    {
-        if(age != null) {
-            return _patientRepository.searchPatient(age);
-        }
+    public List<Patient> searchPatientByPhone(String phone) {
+        return _patientRepository.searchPatientByPhone(phone);
 
-        else{
-            return _patientRepository.searchPatient(name);
-        }
     }
 
-
-    public Patient updatePatient(int patientId, String name, String address, String email, String phone, int age)
-    {
-        return _patientRepository.updatePatient(patientId, name, address, email, phone, age);
+    public Patient updatePatient(int patientId, String name, String password, String address, String email,
+            String phone, int age) {
+        return _patientRepository.updatePatient(patientId, name, password, address, email, phone, age);
     }
 
-    public void removePatient(int patientId)
-    {
-         _patientRepository.deletePatient(patientId);
+    public void removePatient(int patientId) {
+        _patientRepository.deletePatient(patientId);
     }
-    
+
 }

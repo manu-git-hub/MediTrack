@@ -3,15 +3,18 @@ package com.airtribe.meditrack.entity;
 public class Person {
 
     private String name;
+    private String password;
     private String address;
     private String phone;
     private String email;
     private String personType;
     private int age;
 
-    public Person(String name, String address, String phone, String email, String personType, int age) {
-        
+    public Person(String name, String password, String address, String phone, String email, String personType,
+            int age) {
+
         this.name = name;
+        this.password = password;
         this.address = address;
         this.phone = phone;
         this.email = email;
@@ -19,9 +22,13 @@ public class Person {
         this.age = age;
     }
 
-    //Getters
+    // Getters
     public String getName() {
         return name;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getAddress() {
@@ -40,8 +47,7 @@ public class Person {
         return personType;
     }
 
-    public int getAge()
-    {
+    public int getAge() {
         return age;
     }
 
