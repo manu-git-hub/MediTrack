@@ -1,6 +1,6 @@
 package com.airtribe.meditrack.entity;
 
-public class Person {
+public class Person extends MedicalEntity{
 
     private String name;
     private String address;
@@ -9,8 +9,8 @@ public class Person {
     private String personType;
     private int age;
 
-    public Person(String name, String address, String phone, String email, String personType, int age) {
-        
+    public Person(int id,String name, String address, String phone, String email, String personType, int age) {
+        super(id);
         this.name = name;
         this.address = address;
         this.phone = phone;
@@ -63,5 +63,15 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public void displayDetails() {
+        System.out.println("[" + personType + "] ID: " + getMedicalEntityId() + " | Name: " + name + " | Age: " + age);
+    }
+
+    @Override
+    public boolean matchesSearchTerm(String keyword) {
+        return this.name.toLowerCase().contains(keyword.toLowerCase());
     }
 }
