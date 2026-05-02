@@ -1,13 +1,11 @@
 package com.airtribe.meditrack.service;
 
 import com.airtribe.meditrack.entity.Doctor;
-import com.airtribe.meditrack.entity.Patient;
 import com.airtribe.meditrack.enums.Specialization;
 import com.airtribe.meditrack.interfaces.Searchable;
 import com.airtribe.meditrack.util.DataStore;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DoctorService implements Searchable<Doctor> {
 
@@ -16,6 +14,7 @@ public class DoctorService implements Searchable<Doctor> {
     public DoctorService(DataStore<Doctor> doctorStore) {
         this.doctorStore = doctorStore;
     }
+
     public void addDoctor(Doctor doctor) {
         doctorStore.add(doctor);
     }
@@ -48,4 +47,8 @@ public class DoctorService implements Searchable<Doctor> {
                 .orElse(0);
     }
 
+    //CSV
+    public void loadDoctors(List<Doctor> doctors) {
+        doctors.forEach(doctorStore::add);
+    }
 }

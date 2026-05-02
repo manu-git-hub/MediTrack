@@ -6,7 +6,6 @@ import com.airtribe.meditrack.util.DataStore;
 import com.airtribe.meditrack.util.Validator;
 
 import java.util.List;
-import java.util.Optional;
 
 public class PatientService implements Searchable<Patient> {
 
@@ -60,6 +59,10 @@ public class PatientService implements Searchable<Patient> {
         }
     }
 
+    //CSV
+    public void loadPatients(List<Patient> patients) {
+        patients.forEach(patientStore::add);
+    }
 
 
 }

@@ -11,8 +11,7 @@ public class BillingService implements Payable {
 
     private final DataStore<Bill> billStore;
 
-    public BillingService(DataStore<Bill> billStore)
-    {
+    public BillingService(DataStore<Bill> billStore) {
         this.billStore = billStore;
     }
 
@@ -27,4 +26,8 @@ public class BillingService implements Payable {
         return billStore.getAll();
     }
 
+    //CSV
+    public void loadBills(List<Bill> bills) {
+        bills.forEach(billStore::add);
+    }
 }

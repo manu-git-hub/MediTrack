@@ -62,7 +62,7 @@ mechanics operate:
 
 ## Project Architecture
 
-We structured the project using standard Java enterprise packaging conventions:
+We structured the project using standard Java enterprise packaging conventions :
 
 ```text
 src/

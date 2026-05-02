@@ -89,4 +89,9 @@ public class AppointmentService {
                 .filter(a -> a.getStatus() == AppointmentStatus.CONFIRMED)
                 .toList();
     }
+
+    //CSV
+    public void loadAppointments(List<Appointment> appointments) {
+        appointments.forEach(appointmentStore::add);
+    }
 }
