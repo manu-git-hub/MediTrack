@@ -1,0 +1,2 @@
+doctorId,name,address,phone,email,age,specialization,fee,deleted
+dr.000001,Ravi,Chennai,8888888888,ravi@mail.com,45,CARDIOLOGY,500.0,false

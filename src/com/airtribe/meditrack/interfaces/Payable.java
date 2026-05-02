@@ -1,10 +1,7 @@
 package com.airtribe.meditrack.interfaces;
 
+import com.airtribe.meditrack.entity.Bill;
+
 public interface Payable {
-    double calculateTotal();
-    default void printReceipt() {
-        System.out.println("--- Payment Receipt ---");
-        System.out.println("Total Amount: $" + calculateTotal());
-        System.out.println("-----------------------");
-    }
+    Bill generateBill(String appointmentId, double fee);
 }

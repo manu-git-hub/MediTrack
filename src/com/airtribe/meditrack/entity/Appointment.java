@@ -1,44 +1,107 @@
 package com.airtribe.meditrack.entity;
 
-import com.airtribe.meditrack.Enum.AppointmentStatus;
-
 import java.time.LocalDateTime;
 
+import com.airtribe.meditrack.enums.AppointmentStatus;
+import com.airtribe.meditrack.util.IdGenerator;
+
 public class Appointment implements Cloneable{
-    private int appointmentId;
-    private Patient patient;
-    private Doctor doctor;
-    private String appointmentDate;
-    private AppointmentStatus status;
 
-    public Appointment(int appointmentId, Patient patient, Doctor doctor, String date) {
-        this.appointmentId = appointmentId;
-        this.patient = patient;
-        this.doctor = doctor;
-        this.appointmentDate = date;
-        this.status = AppointmentStatus.PENDING;
-    }
+	private final String appointmentId;
+	private final String patientId;
+	private final String doctorId;
+	private final LocalDateTime appointmentTime;
 
-    public int getAppointmentId() { return appointmentId; }
-    public Patient getPatient() { return patient; }
-    public Doctor getDoctor() { return doctor; }
-    public AppointmentStatus getStatus() { return status; }
-    public void setStatus(AppointmentStatus status) { this.status = status; }
+	private AppointmentStatus status;
 
-    @Override
-    public Appointment clone() {
-        try {
-            return (Appointment) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
-    }
+	public Appointment(String appointmentId, String patientId, String doctorId, LocalDateTime appointmentTime, AppointmentStatus status) {
 
-    @Override
-    public String toString() {
-        return " {ID=" + appointmentId + ", Patient=" + patient.getName() +
-                ", Doctor=" + doctor.getName() + ", Date='" + appointmentDate + "', Status=" + status + "}";
-    }
+		if (appointmentId == null || appointmentId.isBlank()) {
+			throw new IllegalArgumentException("Invalid appointment ID");
+		}
+		if (patientId == null || patientId.isBlank()) {
+			throw new IllegalArgumentException("Invalid patient ID");
+		}
+		if (doctorId == null || doctorId.isBlank()) {
+			throw new IllegalArgumentException("Invalid doctor ID");
+		}
+		if (appointmentTime == null) {
+			throw new IllegalArgumentException("Appointment time cannot be null");
+		}
+		if (status == null) {
+			throw new IllegalArgumentException("Status cannot be null");
+		}
 
+		this.appointmentId = appointmentId;
+		this.patientId = patientId;
+		this.doctorId = doctorId;
+		this.appointmentTime = appointmentTime;
+		this.status = status;
+	}
 
+	public Appointment(String patientId, String doctorId, LocalDateTime appointmentTime) {
+		this(IdGenerator.generateForAppointment(), patientId, doctorId, appointmentTime, AppointmentStatus.CONFIRMED);
+	}
+
+	public String getAppointmentId() {
+		return appointmentId;
+	}
+
+	public String getPatientId() {
+		return patientId;
+	}
+
+	public String getDoctorId() {
+		return doctorId;
+	}
+
+	public LocalDateTime getAppointmentTime() {
+		return appointmentTime;
+	}
+
+	public AppointmentStatus getStatus() {
+		return status;
+	}
+
+	public void cancel() {
+		if (this.status == AppointmentStatus.CANCELLED) {
+			throw new IllegalStateException("Appointment already cancelled");
+		}
+		this.status = AppointmentStatus.CANCELLED;
+	}
+
+	@Override
+	public String toString() {
+		return "Appointment{" + "id='" + appointmentId + '\'' + ", patientId='" + patientId + '\'' + ", doctorId='" + doctorId + '\'' + ", time=" + appointmentTime + ", status=" + status + '}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (!(o instanceof Appointment))
+			return false;
+		Appointment that = (Appointment) o;
+		return appointmentId.equals(that.appointmentId);
+	}
+
+	@Override
+	public int hashCode() {
+		return appointmentId.hashCode();
+	}
+
+	@Override
+	public Appointment clone() {
+		try {
+			return new Appointment(
+					this.getAppointmentId(),
+					this.getPatientId(),
+					this.getDoctorId(),
+					this.getAppointmentTime(),
+					this.getStatus()
+			);
+		} catch (Exception e) {
+			throw new RuntimeException("Clone failed", e);
+		}
+	}
 }

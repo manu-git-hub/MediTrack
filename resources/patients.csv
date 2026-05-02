@@ -1,0 +1,2 @@
+patientId,name,address,phone,email,age,deleted
+pt.000001,John,Chennai,9999999999,john@mail.com,30,false

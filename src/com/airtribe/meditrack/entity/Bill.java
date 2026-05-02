@@ -1,49 +1,55 @@
 package com.airtribe.meditrack.entity;
 
-import com.airtribe.meditrack.constants.Constants;
-import com.airtribe.meditrack.interfaces.Payable;
+import com.airtribe.meditrack.util.Configuration;
+import com.airtribe.meditrack.util.IdGenerator;
 
-public class Bill implements Payable {
-    private int billId;
-    private Appointment appointment;
-    private double fee;
+public class Bill {
 
-    public Bill(int billId, Appointment appointment, double fee) {
-        this.billId = billId;
-        this.appointment = appointment;
-        this.fee = fee;
-    }
+	private final String billId;
+	private final String appointmentId;
 
-    public int getBillId() {
-        return billId;
-    }
+	private double consultationFee;
+	private double taxAmount;
+	private double totalAmount;
 
-    public void setBillId(int billId) {
-        this.billId = billId;
-    }
+	private BillSummary summary;
 
-    public Appointment getAppointment() {
-        return appointment;
-    }
+	public Bill(String appointmentId, double consultationFee) {
 
-    public void setAppointment(Appointment appointment) {
-        this.appointment = appointment;
-    }
+		if (appointmentId == null || appointmentId.isBlank())
+			throw new IllegalArgumentException("Invalid appointment ID");
 
-    public double getFee() {
-        return fee;
-    }
+		if (consultationFee < 0)
+			throw new IllegalArgumentException("Invalid consultation fee");
 
-    public void setFee(double fee) {
-        this.fee = fee;
-    }
+		this.billId = IdGenerator.generateGeneric("bl.");
+		this.appointmentId = appointmentId;
+		this.consultationFee = consultationFee;
 
-    @Override
-    public double calculateTotal() {
-        return fee + (fee * Constants.TAX_RATE);
-    }
+		calculate();
+	}
 
-    public BillSummary generateSummary() {
-        return new BillSummary (billId, appointment.getPatient().getName(), calculateTotal());
-    }
+	private void calculate() {
+		this.taxAmount = consultationFee * new Configuration().getPropertyAsInt("billing.taxrate");
+		this.totalAmount = consultationFee + taxAmount;
+
+		this.summary = new BillSummary(billId, appointmentId, consultationFee, taxAmount, totalAmount);
+	}
+
+	public BillSummary getSummary() {
+		return summary;
+	}
+
+	public String getBillId() {
+		return billId;
+	}
+
+	public String getAppointmentId() {
+		return appointmentId;
+	}
+
+	@Override
+	public String toString() {
+		return summary.toString();
+	}
 }

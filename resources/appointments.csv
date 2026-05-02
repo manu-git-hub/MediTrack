@@ -1,0 +1,2 @@
+appointmentId,patientId,doctorId,time,status
+ap.000001,pt.000001,dr.000001,2026-05-01T10:30,CONFIRMED

@@ -1,34 +1,51 @@
 package com.airtribe.meditrack.service;
 
 import com.airtribe.meditrack.entity.Doctor;
-import com.airtribe.meditrack.repository.DoctorRepository;
+import com.airtribe.meditrack.entity.Patient;
+import com.airtribe.meditrack.enums.Specialization;
+import com.airtribe.meditrack.interfaces.Searchable;
+import com.airtribe.meditrack.util.DataStore;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class DoctorService {
-    private final DoctorRepository _doctorRepository;
+public class DoctorService implements Searchable<Doctor> {
 
-    public DoctorService(DoctorRepository doctorRepository) {
-        _doctorRepository = doctorRepository;
+    private DataStore<Doctor> doctorStore;
+
+    public DoctorService(DataStore<Doctor> doctorStore) {
+        this.doctorStore = doctorStore;
     }
-
-    //View all doctors
-    public List<Doctor> viewDoctorList() {
-        return _doctorRepository.getDoctorList();
-    }
-
-    //Add new Doctor
     public void addDoctor(Doctor doctor) {
-        _doctorRepository.addDoctor(doctor);
+        doctorStore.add(doctor);
     }
 
-    //Update Doctor
-    public Doctor updateDoctor(int doctorId, String name, String address, String email, String phone, int age) {
-        return _doctorRepository.updateDoctor(doctorId, name, address, email, phone, age);
+    public List<Doctor> getAllDoctors() {
+        return doctorStore.getAll();
     }
 
-    //Delete Doctor
-    public void removeDoctor(int doctorId) {
-        _doctorRepository.deleteDoctor(doctorId);
+    @Override
+    public Doctor searchById(String id) {
+        return doctorStore.getAll()
+                .stream()
+                .filter(d -> d.getDoctorId().equals(id))
+                .findFirst()
+                .orElse(null);
     }
+
+    public List<Doctor> filterBySpecialization(Specialization specialization) {
+        return doctorStore.getAll()
+                .stream()
+                .filter(d -> d.getSpecialization() == specialization)
+                .toList();
+    }
+
+    public double averageFee() {
+        return doctorStore.getAll()
+                .stream()
+                .mapToDouble(Doctor::getConsultationFee)
+                .average()
+                .orElse(0);
+    }
+
 }
