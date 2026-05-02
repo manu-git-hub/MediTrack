@@ -102,7 +102,6 @@ public class Main {
                         System.out.println("\nSaving data to CSV files...");
                         CSVDataLoader.saveAll(patientService, doctorService, appointmentService, billingService);
                         System.out.println("Data saved successfully. Thank you for using MediTrack!");
-                        System.exit(0);
 
                     case 10:
                         System.out.println(
